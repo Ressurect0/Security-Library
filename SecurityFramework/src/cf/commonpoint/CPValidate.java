@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author Sanjeet Singh R
  */
 public class CPValidate {
-    public static String CPValidate(String rawText, String type)
+    private static int CPValidate(String rawText, String type)
     {
         int statusCode;
         /* 0-Bad Input
@@ -29,6 +29,8 @@ public class CPValidate {
                 +"[a-zA-Z0-9-]+(\\.[a-zA-Z0-9]+)*(\\.[a-zA-z]{2,})$");break;
             case "password": pattern=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A_Z]).{4,8}$");break;
             case "phone-number":pattern=Pattern.compile("^[0-9]{10}$");break;
+            //Jeff Ichnowski(author of the OWASP Java Encoder Project) alternate Code ?
+            case "URL": pattern=Pattern.compile("^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:]])?$");
             default: break;
         }
         if(pattern!=null)
@@ -39,7 +41,7 @@ public class CPValidate {
             else statusCode=0;
         }
         else statusCode=2;
-        return rawText;
+        return statusCode;
     }
     
 }
