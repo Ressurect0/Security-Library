@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
  * @author Sanjeet Singh R
  */
 public class CPFilter {
-    private static void redirect(String indicator,HttpServletRequest request,HttpServletResponse response) throws IOException, ParserConfigurationException, SAXException
+    public static void redirect(String indicator,HttpServletRequest request,HttpServletResponse response) throws IOException, ParserConfigurationException, SAXException
     {
         switch(indicator)
         {
