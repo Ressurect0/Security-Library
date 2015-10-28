@@ -19,6 +19,19 @@ import org.xml.sax.SAXException;
  * @author Sanjeet Singh R
  */
 public class XMLParser {
+    
+    public static int getNodeLength(String uri, String node) throws SAXException, IOException, ParserConfigurationException
+    {
+        String nodeValue=null;
+        DocumentBuilderFactory documentBuilderFactory=DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder=documentBuilderFactory.newDocumentBuilder();
+        Document document=documentBuilder.parse(uri);
+        
+        Element rootElement=document.getDocumentElement();
+        NodeList nodeList=rootElement.getElementsByTagName(node);
+        return nodeList.getLength();
+    }
+    
     public static String getNodeValue(String uri, String node) throws ParserConfigurationException, SAXException, IOException
     {
         String nodeValue=null;
@@ -33,5 +46,26 @@ public class XMLParser {
         return(sampleElement.getFirstChild().getNodeValue());
 
     }
-    
+    public static String[] getNodeValues(String uri, String node) throws ParserConfigurationException, SAXException, IOException
+    {
+        String nodeValue=null;
+        DocumentBuilderFactory documentBuilderFactory=DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder=documentBuilderFactory.newDocumentBuilder();
+        Document document=documentBuilder.parse(uri);
+        
+        Element rootElement=document.getDocumentElement();
+        NodeList nodeList=rootElement.getElementsByTagName(node);
+        Element sampleElement;
+        
+        
+        String[] elementValues=new String[nodeList.getLength()];
+        for(int i=0;i<nodeList.getLength();i++)
+        {
+            sampleElement=(Element)nodeList.item(i);
+            elementValues[i]=sampleElement.getFirstChild().getNodeValue();
+        }
+        
+        return(elementValues);
+
+    }
 }
